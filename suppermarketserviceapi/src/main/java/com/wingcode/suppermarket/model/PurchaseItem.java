@@ -74,7 +74,7 @@ public class PurchaseItem implements Serializable {
 	 * Constructor.
 	 */
 	public PurchaseItem() {
-		this.saleItemSet = new HashSet<SaleItem>();
+		this.saleItemSet = new HashSet<>();
 	}
 
 	/**

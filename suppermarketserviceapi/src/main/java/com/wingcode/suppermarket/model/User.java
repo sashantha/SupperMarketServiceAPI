@@ -40,9 +40,9 @@ public class User implements Serializable {
 	 * Constructor.
 	 */
 	public User() {
-		this.purchaseSet = new HashSet<Purchase>();
-		this.saleInvoiceSet = new HashSet<SaleInvoice>();
-		this.saleItemSet = new HashSet<SaleItem>();
+		this.purchaseSet = new HashSet<>();
+		this.saleInvoiceSet = new HashSet<>();
+		this.saleItemSet = new HashSet<>();
 	}
 
 	/**

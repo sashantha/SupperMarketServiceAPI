@@ -61,12 +61,7 @@ public class SaleItem implements Serializable {
 
 	/** user. */
 	private User user;
-
-	/**
-	 * Constructor.
-	 */
-	public SaleItem() {
-	}
+	
 
 	/**
 	 * Set the sale_Item_Id.

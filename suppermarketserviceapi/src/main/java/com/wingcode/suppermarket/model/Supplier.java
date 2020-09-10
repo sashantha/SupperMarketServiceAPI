@@ -44,7 +44,7 @@ public class Supplier implements Serializable {
 	 * Constructor.
 	 */
 	public Supplier() {
-		this.purchaseSet = new HashSet<Purchase>();
+		this.purchaseSet = new HashSet<>();
 	}
 
 	/**

@@ -92,7 +92,7 @@ public class SaleInvoice implements Serializable {
 	 * Constructor.
 	 */
 	public SaleInvoice() {
-		this.saleItemSet = new HashSet<SaleItem>();
+		this.saleItemSet = new HashSet<>();
 	}
 
 	/**

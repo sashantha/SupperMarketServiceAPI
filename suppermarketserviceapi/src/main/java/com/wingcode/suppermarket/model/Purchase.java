@@ -80,7 +80,7 @@ public class Purchase implements Serializable {
 	 * Constructor.
 	 */
 	public Purchase() {
-		this.purchaseItemSet = new HashSet<PurchaseItem>();
+		this.purchaseItemSet = new HashSet<>();
 	}
 
 	/**

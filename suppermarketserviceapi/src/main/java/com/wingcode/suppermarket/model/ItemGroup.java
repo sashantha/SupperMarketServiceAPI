@@ -25,7 +25,7 @@ public class ItemGroup implements Serializable {
 	 * Constructor.
 	 */
 	public ItemGroup() {
-		this.itemSet = new HashSet<Item>();
+		this.itemSet = new HashSet<>();
 	}
 
 	/**
