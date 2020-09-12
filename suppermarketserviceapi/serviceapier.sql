@@ -203,6 +203,7 @@ CREATE TABLE user
 	user_Id int NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL,
 	email varchar(100) NOT NULL,
+	user_Role varchar(20) NOT NULL,
 	password varchar(50) NOT NULL,
 	PRIMARY KEY (user_Id),
 	UNIQUE (user_Id)
