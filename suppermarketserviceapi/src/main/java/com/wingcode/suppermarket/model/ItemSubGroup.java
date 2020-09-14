@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 /**
  * Model class of item_Sub_Group.
  * 
@@ -15,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 @Entity
 @Table(name = "item_sub_sroup")
-@JsonRootName(value = "ItemSubGroup")
+//@JsonRootName(value = "ItemSubGroup")
 public class ItemSubGroup extends AuditModel {
 
 	/** serialVersionUID. */

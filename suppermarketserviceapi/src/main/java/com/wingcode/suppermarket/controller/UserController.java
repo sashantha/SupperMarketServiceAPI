@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wingcode.suppermarket.exception.InvalidDetailsException;
+import com.wingcode.suppermarket.exception.ResourceNotFoundException;
 import com.wingcode.suppermarket.model.User;
 import com.wingcode.suppermarket.repository.UserRepository;
 
@@ -50,4 +52,14 @@ public class UserController {
 	private boolean validNewUser(User u) {
 		return (u.getName() != null || u.getEmail() != null || u.getPassword() != null || u.getUserRole() != null);	
 	}
+	
+	@PutMapping("/users/{userId}")
+    public User updateUser(@PathVariable(value = "userId") Integer userId, @Valid @RequestBody User u) {
+        return usRepo.findById(userId).map(fu -> {
+        	fu.setName(u.getName());
+        	fu.setEmail(u.getEmail());
+        	fu.setPassword(u.getPassword());
+            return usRepo.save(fu);
+        }).orElseThrow(() -> new ResourceNotFoundException("UserId " + userId + " not found"));
+    }
 }

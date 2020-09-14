@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 /**
  * Model class of purchase.
  * 
@@ -25,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 @Entity
 @Table(name = "purchase")
-@JsonRootName(value = "Purchase")
+//@JsonRootName(value = "Purchase")
 public class Purchase extends AuditModel {
 
 	/** serialVersionUID. */

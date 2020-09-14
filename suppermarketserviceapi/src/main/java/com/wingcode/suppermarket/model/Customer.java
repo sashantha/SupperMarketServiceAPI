@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 /**
  * Model class of customer.
  * 
@@ -19,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 @Entity
 @Table(name = "customer")
-@JsonRootName(value = "Customer")
+//@JsonRootName(value = "Customer")
 public class Customer extends AuditModel {
 
 	/** serialVersionUID. */

@@ -2,14 +2,15 @@ package com.wingcode.suppermarket.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Model class of item.
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 @Entity
 @Table(name = "item")
-@JsonRootName(value = "Item")
+//@JsonRootName(value = "Item")
 public class Item extends AuditModel {
 
 	/** serialVersionUID. */
@@ -44,11 +45,13 @@ public class Item extends AuditModel {
 	private String itemName;
 
 	/** item_Group. */
-	@Column(name = "item_Group")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "item_Group")
 	private ItemGroup itemGroup;
 
 	/** item_Sub_Group. */
-	@Column(name = "item_Sub_Group")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "item_Sub_Group")
 	private ItemSubGroup itemSubGroup;
 
 	/** item_Cost. */
