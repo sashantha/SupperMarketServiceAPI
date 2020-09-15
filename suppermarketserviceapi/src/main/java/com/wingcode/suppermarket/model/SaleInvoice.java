@@ -126,13 +126,13 @@ public class SaleInvoice extends AuditModel {
 
 	/** The set of sale_Item. */
 	@OneToMany(mappedBy = "saleInvoice", cascade = CascadeType.ALL)
-	private List<SaleItem> saleItemSet;
+	private List<SaleItem> saleItems;
 
 	/**
 	 * Constructor.
 	 */
 	public SaleInvoice() {
-		this.saleItemSet = new ArrayList<>();
+		this.saleItems = new ArrayList<>();
 	}
 
 	/**
@@ -575,11 +575,11 @@ public class SaleInvoice extends AuditModel {
 	/**
 	 * Set the set of the sale_Item.
 	 * 
-	 * @param saleItemSet
+	 * @param saleItems
 	 *            The set of sale_Item
 	 */
-	public void setSaleItemSet(List<SaleItem> saleItemSet) {
-		this.saleItemSet = saleItemSet;
+	public void setSaleItems(List<SaleItem> saleItems) {
+		this.saleItems = saleItems;
 	}
 
 	/**
@@ -589,7 +589,7 @@ public class SaleInvoice extends AuditModel {
 	 *            sale_Item
 	 */
 	public void addSaleItem(SaleItem saleItem) {
-		this.saleItemSet.add(saleItem);
+		this.saleItems.add(saleItem);
 	}
 
 	/**
@@ -597,8 +597,8 @@ public class SaleInvoice extends AuditModel {
 	 * 
 	 * @return The set of sale_Item
 	 */
-	public List<SaleItem> getSaleItemSet() {
-		return this.saleItemSet;
+	public List<SaleItem> getSaleItems() {
+		return this.saleItems;
 	}
 
 	/**

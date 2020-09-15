@@ -15,7 +15,6 @@ public interface PurchaseItemRepository extends JpaRepository<PurchaseItem, Long
 	List<PurchaseItem> findByPurchaseId(Long purchaseId);
 	
 	@Query("select pi from PurchaseItem pi join pi.item i where i.itemCode = ?1")
-	List<PurchaseItem> findByItemId(String itemCode);
-	
+	List<PurchaseItem> findByItemCode(String itemCode);
 	
 }

@@ -111,13 +111,13 @@ public class Purchase extends AuditModel {
 
 	/** The set of purchase_Item. */
 	@OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
-	private List<PurchaseItem> purchaseItemSet;
+	private List<PurchaseItem> purchaseItems;
 
 	/**
 	 * Constructor.
 	 */
 	public Purchase() {
-		this.purchaseItemSet = new ArrayList<>();
+		this.purchaseItems = new ArrayList<>();
 	}
 
 	/**
@@ -484,11 +484,11 @@ public class Purchase extends AuditModel {
 	/**
 	 * Set the set of the purchase_Item.
 	 * 
-	 * @param purchaseItemSet
+	 * @param purchaseItems
 	 *            The set of purchase_Item
 	 */
-	public void setPurchaseItemSet(List<PurchaseItem> purchaseItemSet) {
-		this.purchaseItemSet = purchaseItemSet;
+	public void setPurchaseItems(List<PurchaseItem> purchaseItems) {
+		this.purchaseItems = purchaseItems;
 	}
 
 	/**
@@ -498,7 +498,7 @@ public class Purchase extends AuditModel {
 	 *            purchase_Item
 	 */
 	public void addPurchaseItem(PurchaseItem purchaseItem) {
-		this.purchaseItemSet.add(purchaseItem);
+		this.purchaseItems.add(purchaseItem);
 	}
 
 	/**
@@ -506,8 +506,8 @@ public class Purchase extends AuditModel {
 	 * 
 	 * @return The set of purchase_Item
 	 */
-	public List<PurchaseItem> getPurchaseItemSet() {
-		return this.purchaseItemSet;
+	public List<PurchaseItem> getPurchaseItems() {
+		return this.purchaseItems;
 	}
 
 	/**
