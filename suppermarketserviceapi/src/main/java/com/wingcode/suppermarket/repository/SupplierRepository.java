@@ -12,12 +12,18 @@ import com.wingcode.suppermarket.model.SupplierCriteria;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Long>{
 	
-	@Query("select s from Supplier s where s.suplierCode = ?1")
-	Supplier findBySupplierCode(String supplierCode);
+	@Query("select s from Supplier s join s.branch b where b.id = ?2 and s.id = ?1")
+	Supplier findByIdAndBranchId(Long id, Integer branchId);
 	
-	@Query("select s from Supplier s where s.supplierName = ?1")
-	Supplier findBySupplierName(String supplierName);
+	@Query("select s from Supplier s join s.branch b where b.id = ?2 and s.code = ?1")
+	Supplier findByCodeAndBranchId(String code, Integer branchId);
 	
-	@Query("select new com.wingcode.suppermarket.model.SupplierCriteria(s.supplierId, s.suplierCode, s.supplierName) from Supplier s")
-	List<SupplierCriteria> getAllBySupplierIdCodeAndName();
+	@Query("select s from Supplier s join s.branch b where b.id = ?2 and s.name = ?1")
+	Supplier findByNameAndBranchId(String name, Integer branchId);
+	
+	@Query("select new com.wingcode.suppermarket.model.SupplierCriteria(s.id, s.code, s.name) from Supplier s join s.branch b where b.id = ?1")
+	List<SupplierCriteria> getAllIdCodeAndNameByBranchId(Integer branchId);
+	
+	@Query("select s from Supplier s join s.branch b where b.id = ?1")
+	List<Supplier> findAllByBranchId(Integer branchId);
 }

@@ -6,13 +6,15 @@ public class ItemCriteria {
 	private String code;
 	private String barcode;
 	private String name;
-	
-	public ItemCriteria(Long id, String code, String barcode, String name) {
+	private String otherName;
+
+	public ItemCriteria(Long id, String code, String barcode, String name, String otherName) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.barcode = barcode;
 		this.name = name;
+		this.otherName = otherName;
 	}
 
 	public Long getId() {
@@ -45,6 +47,14 @@ public class ItemCriteria {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
-	
+	}
+
+	public String getOtherName() {
+		return otherName;
+	}
+
+	public void setOtherName(String otherName) {
+		this.otherName = otherName;
+	}
+
 }

@@ -13,27 +13,28 @@ import com.wingcode.suppermarket.model.SaleInvoice;
 public interface SaleInvoiceRepository extends JpaRepository<SaleInvoice, Long>{
 	
 	
-	@Query("select s from SaleInvoice s where s.invoiceNo = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s where s.invoiceNo = ?1 and not s.recordState ='cancel'")
 	SaleInvoice findByInvoiceNo(String invoiceNo);
 	
-	@Query("select s from SaleInvoice s where s.invoiceDate = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s where s.invoiceDate = ?1 and not s.recordState ='cancel'")
 	List<SaleInvoice> findByInvoiceDate(Date invoiceDate);
 	
-	@Query("select s from SaleInvoice s where s.invoiceType = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s where s.invoiceType = ?1 and not s.recordState ='cancel'")
 	List<SaleInvoice> findByInvoiceType(String invoiceType);
 	
-	@Query("select s from SaleInvoice s where s.saleDay = ?1 and s.saleMonth = ?2 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s where day(s.invoiceDate) = ?1 and month(s.invoiceDate) = ?2 and not s.recordState ='cancel'")
 	List<SaleInvoice> findBySaleDayAndSaleMonth(Integer saleDay, Integer saleMonth);
 	
-	@Query("select s from SaleInvoice s where s.saleMonth = ?1 and s.saleYear = ?2 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s where month(s.invoiceDate) = ?1 and year(s.invoiceDate) = ?2 and not s.recordState ='cancel'")
 	List<SaleInvoice> findBySaleMonthAndSaleYear(Integer saleMonth, Integer saleYear);
 	
-	@Query("select s from SaleInvoice s join s.user u where u.userId = ?2 and s.invoiceDate = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s join s.user u where u.id = ?2 and s.invoiceDate = ?1 and not s.recordState ='cancel'")
 	List<SaleInvoice> findByInvoiceDateAndUserId(Date invoiceDate, Integer userId);
 	
-	@Query("select s from SaleInvoice s join s.customer c where c.customerId = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s join s.customer c where c.id = ?1 and not s.recordState ='cancel'")
 	List<SaleInvoice> findByCustomerId(Long customerId);
 	
-	@Query("select s from SaleInvoice s join s.customer c where c.customerId = ?2 and s.invoiceDate = ?1 and not s.recordState ='deleted'")
+	@Query("select s from SaleInvoice s join s.customer c where c.id = ?2 and s.invoiceDate = ?1 and not s.recordState ='cancel'")
 	List<SaleInvoice> findByInvoiceDateAndCustomerId(Date invoiceDate, Long customerId);
+	
 }

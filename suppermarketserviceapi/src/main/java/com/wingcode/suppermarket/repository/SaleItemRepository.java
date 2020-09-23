@@ -10,8 +10,13 @@ import org.springframework.stereotype.Repository;
 import com.wingcode.suppermarket.model.SaleItem;
 
 @Repository
-public interface SaleItemRepository extends JpaRepository<SaleItem, Long>{
-	
-	@Query("select i from SaleItem i join i.saleInvoice s where not s.recordState ='deleted' and i.saleDate = ?1")
+public interface SaleItemRepository extends JpaRepository<SaleItem, Long> {
+
 	List<SaleItem> findBySaleDate(Date saleDate);
+
+	@Query("select i from SaleItem i join i.saleInvoice s where s.id = ?1")
+	List<SaleItem> findByInvoiceId(Long invoiceId);
+
+	@Query("select i from SaleItem i join i.item t where t.id = ?1")
+	List<SaleItem> findByItemId(Long itemId);
 }

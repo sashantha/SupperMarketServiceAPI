@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+				<persistence-unit name="suppermarketserviceapi">
+					<class>com.wingcode.suppermarket.model.AuditModel</class>
+					<class>com.wingcode.suppermarket.model.Bank</class>
+					<class>com.wingcode.suppermarket.model.Branch</class>
+					<class>com.wingcode.suppermarket.model.BranchAccount</class>
+					<class>com.wingcode.suppermarket.model.CashBook</class>
+					<class>com.wingcode.suppermarket.model.ChequeBook</class>
+					<class>com.wingcode.suppermarket.model.Customer</class>
+					<class>com.wingcode.suppermarket.model.CustomerCreditAccount</class>
+					<class>com.wingcode.suppermarket.model.CustomerCreditInvoice</class>
+					<class>com.wingcode.suppermarket.model.CustomerPayment</class>
+					<class>com.wingcode.suppermarket.model.Item</class>
+					<class>com.wingcode.suppermarket.model.ItemGroup</class>
+					<class>com.wingcode.suppermarket.model.ItemSubGroup</class>
+					<class>com.wingcode.suppermarket.model.Purchase</class>
+					<class>com.wingcode.suppermarket.model.PurchaseItem</class>
+					<class>com.wingcode.suppermarket.model.SaleInvoice</class>
+					<class>com.wingcode.suppermarket.model.SaleItem</class>
+					<class>com.wingcode.suppermarket.model.StoreInfor</class>
+					<class>com.wingcode.suppermarket.model.Supplier</class>
+					<class>com.wingcode.suppermarket.model.SupplierCreditAccount</class>
+					<class>com.wingcode.suppermarket.model.SupplierCreditInvoice</class>
+					<class>com.wingcode.suppermarket.model.SupplierPayment</class>
+					<class>com.wingcode.suppermarket.model.User</class>					
+				</persistence-unit>
+</persistence>

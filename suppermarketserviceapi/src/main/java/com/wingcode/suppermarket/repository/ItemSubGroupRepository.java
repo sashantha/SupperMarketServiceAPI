@@ -1,14 +1,12 @@
 package com.wingcode.suppermarket.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.wingcode.suppermarket.model.ItemSubGroup;
 
 @Repository
-public interface ItemSubGroupRepository extends JpaRepository<ItemSubGroup, String>{
+public interface ItemSubGroupRepository extends JpaRepository<ItemSubGroup, Integer>{
 	
-	@Query("select g from ItemSubGroup g where g.subGroupName = ?1")
-	ItemSubGroup getBySubGroupName(String subGroupName);
+	ItemSubGroup findBySubGroupName(String subGroupName);
 }

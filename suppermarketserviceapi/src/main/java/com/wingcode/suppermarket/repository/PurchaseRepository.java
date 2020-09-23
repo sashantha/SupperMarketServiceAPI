@@ -11,26 +11,25 @@ import com.wingcode.suppermarket.model.Purchase;
 
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
-	
-	
-	@Query("select p from Purchase p join p.supplier s where s.suplierCode = ?1 and not p.recordState = 'deleted'")
-	List<Purchase> findBySuplierCode(String suplierCode);
-	
-	@Query("select p from Purchase p join p.supplier s where s.supplierName = ?1 and not p.recordState = 'deleted'")
-	List<Purchase> findBySupplierName(String supplierName);
-	
-	@Query("select p from Purchase p where p.invoiceNo = ?1 and not p.recordState = 'deleted'")
+
+	@Query("select p from Purchase p join p.supplier s where s.id = ?1 and not p.recordState = 'cancel'")
+	List<Purchase> findBySuplierId(Long supplierId);
+
+	@Query("select p from Purchase p where p.invoiceNo = ?1 and not p.recordState = 'cancel'")
 	Purchase findByInvoiceNo(String invoiceNo);
+
+	@Query("select p from Purchase p where p.id = ?1 and not p.recordState = 'cancel'")
+	Purchase findByPurchaseId(Long id);
 	
-	@Query("select p from Purchase p where p.purchaseDate = ?1 and not p.recordState = 'deleted'")
+	@Query("select p from Purchase p where p.purchaseDate = ?1 and not p.recordState = 'cancel'")
 	List<Purchase> findByPurchaseDate(Date purchaseDate);
-	
-	@Query("select p from Purchase p where p.purchaseDate = ?1 and not p.recordState = 'deleted'")
-	List<Purchase> findByPurchaseDay(Integer purchaseDay);
-	
-	@Query("select p from Purchase p where p.purchaseMonth = ?1 and not p.recordState = 'deleted'")
-	List<Purchase> findByPurchaseMonth(Integer purchaseMonth);
-	
-	@Query("select p from Purchase p where p.purchaseYear = ?1 and not p.recordState = 'deleted'")
+
+	@Query("select p from Purchase p where day(p.purchaseDate) = ?1 and month(p.purchaseDate) = ?2 and not p.recordState = 'cancel'")
+	List<Purchase> findByPurchaseDayAndMonth(Integer purchaseDay, Integer purchaseMonth);
+
+	@Query("select p from Purchase p where month(p.purchaseDate) = ?1 and year(p.purchaseDate) = ?2 and not p.recordState = 'cancel'")
+	List<Purchase> findByPurchaseMonth(Integer purchaseMonth, Integer purchaseYear);
+
+	@Query("select p from Purchase p where year(p.purchaseDate) = ?1 and not p.recordState = 'cancel'")
 	List<Purchase> findByPurchaseYear(Integer purchaseYear);
 }
