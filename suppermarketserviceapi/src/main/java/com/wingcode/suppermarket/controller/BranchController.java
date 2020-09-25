@@ -25,7 +25,11 @@ public class BranchController {
 
 	@Autowired
 	private BranchRepository repo;
-
+	
+	/*
+	 * Branch Access Rest Controls 
+	 */
+	
 	@GetMapping("/branches")
 	public List<Branch> getAllBranches() {
 		return repo.findAll();
@@ -71,6 +75,10 @@ public class BranchController {
 		}).orElseThrow(() -> throwResourceNotFoundException("ID", id.toString()));
 	}
 
+	/*
+	 * Branch Account Access Rest Controls 
+	 */
+	
 	private ResourceNotFoundException throwResourceNotFoundException(String proName, String id) {
 		return new ResourceNotFoundException(proName + " " + id + " not found");
 	}
