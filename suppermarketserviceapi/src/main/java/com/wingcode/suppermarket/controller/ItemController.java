@@ -26,7 +26,9 @@ import com.wingcode.suppermarket.model.StoreInfor;
 import com.wingcode.suppermarket.repository.ItemGroupRepository;
 import com.wingcode.suppermarket.repository.ItemRepository;
 import com.wingcode.suppermarket.repository.ItemSubGroupRepository;
+import com.wingcode.suppermarket.repository.MeasurementRepository;
 import com.wingcode.suppermarket.repository.StoreInforRepository;
+import com.wingcode.suppermarket.repository.UnitOfMeasureRepository;
 
 @RestController
 @RequestMapping("item/api/v1")
@@ -44,6 +46,16 @@ public class ItemController {
 	@Autowired
 	private StoreInforRepository siRepo;
 
+	@Autowired
+	private MeasurementRepository meRepo;
+	
+	@Autowired
+	private UnitOfMeasureRepository umRepo;
+	
+	/*
+	 * Item Group Rest Controls 
+	 */
+	
 	@GetMapping("/itemgroups")
 	public List<ItemGroup> getAllItemGroup() {
 		return igRepo.findAll();
@@ -81,6 +93,10 @@ public class ItemController {
 		}).orElseThrow(() -> throwResourceNotFoundException("ItemSubGroupId", id.toString()));
 	}
 
+	/*
+	 * Item Sub Group Rest Controls 
+	 */	
+	
 	@GetMapping("/itemsubgroup")
 	public List<ItemSubGroup> getAllSubItemGroup() {
 		return isgRepo.findAll();
@@ -119,6 +135,10 @@ public class ItemController {
 		}).orElseThrow(() -> throwResourceNotFoundException("ItemSubGroupId", id.toString()));
 	}
 
+	/*
+	 * Item Rest Controls 
+	 */
+	
 	@GetMapping("/items")
 	public List<Item> getAllItems() {
 		return itRepo.findAll();
@@ -190,6 +210,10 @@ public class ItemController {
 		}).orElseThrow(() -> throwResourceNotFoundException("ItemId", id.toString()));
 	}
 
+	/*
+	 * Store Info Rest Controls 
+	 */
+	
 	@GetMapping("/itemstores/{id}")
 	public List<StoreInfor> getAllStoreInforByItemId(@PathVariable(value = "id") Long id) {
 		return siRepo.findByItemId(id);
@@ -233,6 +257,15 @@ public class ItemController {
 			return ResponseEntity.ok(1);
 		}).orElseThrow(() -> throwResourceNotFoundException("ItemitemstoresId", id.toString()));
 	}
+	
+	/*
+	 * Measure Rest Controls 
+	 */
+	
+	
+	/*
+	 * Unit Of Measure Rest Controls 
+	 */
 	
 	private ResourceNotFoundException throwResourceNotFoundException(String proName, String id) {
 		return new ResourceNotFoundException(proName + " " + id + " not found");
