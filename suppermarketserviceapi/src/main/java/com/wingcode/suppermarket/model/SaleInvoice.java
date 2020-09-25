@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "sale_invoice")
 @NamedQuery(name = "SaleInvoice.findAll", query = "SELECT s FROM SaleInvoice s")
-public class SaleInvoice extends com.wingcode.suppermarket.model.AuditModel {
+public class SaleInvoice extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -68,6 +68,9 @@ public class SaleInvoice extends com.wingcode.suppermarket.model.AuditModel {
 
 	@Column(name = "record_state", nullable = false, length = 20)
 	private String recordState;
+
+	@Column(name = "sale_item")
+	private int saleItem;
 
 	@Column(name = "sale_type", nullable = false, length = 20)
 	private String saleType;
@@ -205,6 +208,14 @@ public class SaleInvoice extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setRecordState(String recordState) {
 		this.recordState = recordState;
+	}
+
+	public int getSaleItem() {
+		return this.saleItem;
+	}
+
+	public void setSaleItem(int saleItem) {
+		this.saleItem = saleItem;
 	}
 
 	public String getSaleType() {

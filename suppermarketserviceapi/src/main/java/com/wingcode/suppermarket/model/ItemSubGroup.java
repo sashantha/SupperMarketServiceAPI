@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "item_sub_group")
 @NamedQuery(name = "ItemSubGroup.findAll", query = "SELECT i FROM ItemSubGroup i")
-public class ItemSubGroup extends com.wingcode.suppermarket.model.AuditModel {
+public class ItemSubGroup extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 

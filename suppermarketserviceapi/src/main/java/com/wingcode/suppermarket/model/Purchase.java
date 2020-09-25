@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "purchase")
 @NamedQuery(name = "Purchase.findAll", query = "SELECT p FROM Purchase p")
-public class Purchase extends com.wingcode.suppermarket.model.AuditModel {
+public class Purchase extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,6 +30,9 @@ public class Purchase extends com.wingcode.suppermarket.model.AuditModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
+
+	@Column(name = "cost_amount", nullable = false, precision = 10, scale = 2)
+	private BigDecimal costAmount;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at", nullable = false)
@@ -97,6 +100,14 @@ public class Purchase extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public BigDecimal getCostAmount() {
+		return this.costAmount;
+	}
+
+	public void setCostAmount(BigDecimal costAmount) {
+		this.costAmount = costAmount;
 	}
 
 	public Date getCreatedAt() {

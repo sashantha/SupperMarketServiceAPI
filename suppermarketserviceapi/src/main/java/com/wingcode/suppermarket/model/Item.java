@@ -2,6 +2,7 @@ package com.wingcode.suppermarket.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,8 +23,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "item")
 @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
-public class Item extends com.wingcode.suppermarket.model.AuditModel {
-	
+public class Item extends AuditModel {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -62,6 +64,11 @@ public class Item extends com.wingcode.suppermarket.model.AuditModel {
 	@ManyToOne
 	@JoinColumn(name = "item_sub_group_id", nullable = false)
 	private ItemSubGroup itemSubGroup;
+
+	// bi-directional one-to-one association to UnitOfMeasure
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "unit_of_measure_id", nullable = false)
+	private UnitOfMeasure unitOfMeasure;
 
 	public Long getId() {
 		return this.id;
@@ -141,6 +148,14 @@ public class Item extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setItemSubGroup(ItemSubGroup itemSubGroup) {
 		this.itemSubGroup = itemSubGroup;
+	}
+
+	public UnitOfMeasure getUnitOfMeasure() {
+		return this.unitOfMeasure;
+	}
+
+	public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
 	}
 
 }

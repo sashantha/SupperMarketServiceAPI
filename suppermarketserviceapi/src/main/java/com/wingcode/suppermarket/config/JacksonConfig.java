@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 //@Configuration
 public class JacksonConfig {
-   // @Bean
+   //@Bean
     public Jackson2ObjectMapperBuilder jacksonBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
         builder.featuresToEnable(SerializationFeature.WRAP_ROOT_VALUE); 

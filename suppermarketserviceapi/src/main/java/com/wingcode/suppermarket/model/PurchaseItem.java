@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "purchase_item")
 @NamedQuery(name = "PurchaseItem.findAll", query = "SELECT p FROM PurchaseItem p")
-public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
+public class PurchaseItem extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,9 +33,6 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 
 	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal amount;
-
-	@Column(name = "available_quantity", nullable = false, precision = 10, scale = 2)
-	private BigDecimal availableQuantity;
 
 	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal cost;
@@ -51,7 +48,7 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 	@Column(name = "expire_date")
 	private Date expireDate;
 
-	@Column(name = "free_quantity", nullable = false, precision = 10, scale = 2)
+	@Column(name = "free_quantity", nullable = false, precision = 10, scale = 3)
 	private BigDecimal freeQuantity;
 
 	@Temporal(TemporalType.DATE)
@@ -62,11 +59,17 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 	@Column(name = "purchase_date", nullable = false)
 	private Date purchaseDate;
 
+	@Column(name = "purchase_quantity", nullable = false, precision = 10, scale = 3)
+	private BigDecimal purchaseQuantity;
+
 	@Column(name = "purchase_type", nullable = false, length = 20)
 	private String purchaseType;
 
 	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal quantity;
+
+	@Column(name = "real_quantity", nullable = false, precision = 10, scale = 3)
+	private BigDecimal realQuantity;
 
 	@Column(name = "reorder_level", precision = 10, scale = 2)
 	private BigDecimal reorderLevel;
@@ -105,14 +108,6 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
-	}
-
-	public BigDecimal getAvailableQuantity() {
-		return this.availableQuantity;
-	}
-
-	public void setAvailableQuantity(BigDecimal availableQuantity) {
-		this.availableQuantity = availableQuantity;
 	}
 
 	public BigDecimal getCost() {
@@ -171,6 +166,14 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 		this.purchaseDate = purchaseDate;
 	}
 
+	public BigDecimal getPurchaseQuantity() {
+		return this.purchaseQuantity;
+	}
+
+	public void setPurchaseQuantity(BigDecimal purchaseQuantity) {
+		this.purchaseQuantity = purchaseQuantity;
+	}
+
 	public String getPurchaseType() {
 		return this.purchaseType;
 	}
@@ -185,6 +188,14 @@ public class PurchaseItem extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
+	}
+
+	public BigDecimal getRealQuantity() {
+		return this.realQuantity;
+	}
+
+	public void setRealQuantity(BigDecimal realQuantity) {
+		this.realQuantity = realQuantity;
 	}
 
 	public BigDecimal getReorderLevel() {

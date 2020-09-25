@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-public class User extends com.wingcode.suppermarket.model.AuditModel {
+public class User extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 

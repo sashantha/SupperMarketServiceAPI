@@ -22,8 +22,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "customer_credit_account")
 @NamedQuery(name = "CustomerCreditAccount.findAll", query = "SELECT c FROM CustomerCreditAccount c")
-public class CustomerCreditAccount extends com.wingcode.suppermarket.model.AuditModel {
-
+public class CustomerCreditAccount extends AuditModel {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

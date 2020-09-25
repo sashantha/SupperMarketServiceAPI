@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "cheque_book")
 @NamedQuery(name = "ChequeBook.findAll", query = "SELECT c FROM ChequeBook c")
-public class ChequeBook extends com.wingcode.suppermarket.model.AuditModel {
+public class ChequeBook extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -54,6 +54,10 @@ public class ChequeBook extends com.wingcode.suppermarket.model.AuditModel {
 	private String description;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name = "relese_date", nullable = false)
+	private Date releseDate;
+
+	@Temporal(TemporalType.DATE)
 	@Column(name = "transaction_date", nullable = false)
 	private Date transactionDate;
 
@@ -65,6 +69,11 @@ public class ChequeBook extends com.wingcode.suppermarket.model.AuditModel {
 	@ManyToOne
 	@JoinColumn(name = "branch_id", nullable = false)
 	private Branch branch;
+
+	// bi-directional many-to-one association to BranchAccount
+	@ManyToOne
+	@JoinColumn(name = "branch_account_id", nullable = false)
+	private BranchAccount branchAccount;
 
 	// bi-directional many-to-one association to Purchase
 	@ManyToOne
@@ -145,6 +154,14 @@ public class ChequeBook extends com.wingcode.suppermarket.model.AuditModel {
 		this.description = description;
 	}
 
+	public Date getReleseDate() {
+		return this.releseDate;
+	}
+
+	public void setReleseDate(Date releseDate) {
+		this.releseDate = releseDate;
+	}
+
 	public Date getTransactionDate() {
 		return this.transactionDate;
 	}
@@ -167,6 +184,14 @@ public class ChequeBook extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+
+	public BranchAccount getBranchAccount() {
+		return this.branchAccount;
+	}
+
+	public void setBranchAccount(BranchAccount branchAccount) {
+		this.branchAccount = branchAccount;
 	}
 
 	public Purchase getPurchase() {

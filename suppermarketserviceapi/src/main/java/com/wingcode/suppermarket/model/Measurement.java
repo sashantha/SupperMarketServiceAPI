@@ -1,6 +1,5 @@
 package com.wingcode.suppermarket.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,47 +8,42 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * The persistent class for the supplier_credit_account database table.
+ * The persistent class for the measurement database table.
  * 
  */
 @Entity
-@Table(name = "supplier_credit_account")
-@NamedQuery(name = "SupplierCreditAccount.findAll", query = "SELECT s FROM SupplierCreditAccount s")
-public class SupplierCreditAccount extends AuditModel {
+@Table(name = "measurement")
+@NamedQuery(name = "Measurement.findAll", query = "SELECT m FROM Measurement m")
+public class Measurement extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Long id;
+	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 
-	@Column(name = "total_credit", nullable = false, precision = 10, scale = 2)
-	private BigDecimal totalCredit;
+	@Column(name = "unit_name", nullable = false, length = 20)
+	private String unitName;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 
-	// bi-directional one-to-one association to Supplier
-	@OneToOne(mappedBy = "supplierCreditAccount")
-	private Supplier supplier;
-
-	public Long getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -61,12 +55,12 @@ public class SupplierCreditAccount extends AuditModel {
 		this.createdAt = createdAt;
 	}
 
-	public BigDecimal getTotalCredit() {
-		return this.totalCredit;
+	public String getUnitName() {
+		return this.unitName;
 	}
 
-	public void setTotalCredit(BigDecimal totalCredit) {
-		this.totalCredit = totalCredit;
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 
 	public Date getUpdatedAt() {
@@ -75,14 +69,6 @@ public class SupplierCreditAccount extends AuditModel {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Supplier getSupplier() {
-		return this.supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
 	}
 
 }

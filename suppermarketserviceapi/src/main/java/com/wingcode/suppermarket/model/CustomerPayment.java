@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "customer_payment")
 @NamedQuery(name = "CustomerPayment.findAll", query = "SELECT c FROM CustomerPayment c")
-public class CustomerPayment extends com.wingcode.suppermarket.model.AuditModel {
+public class CustomerPayment extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 

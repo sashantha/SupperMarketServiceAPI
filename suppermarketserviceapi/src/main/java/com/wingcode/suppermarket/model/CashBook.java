@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "cash_book")
 @NamedQuery(name = "CashBook.findAll", query = "SELECT c FROM CashBook c")
-public class CashBook extends com.wingcode.suppermarket.model.AuditModel {
+public class CashBook extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -56,6 +56,11 @@ public class CashBook extends com.wingcode.suppermarket.model.AuditModel {
 	@ManyToOne
 	@JoinColumn(name = "branch_id", nullable = false)
 	private Branch branch;
+
+	// bi-directional many-to-one association to BranchAccount
+	@ManyToOne
+	@JoinColumn(name = "branch_account_id")
+	private BranchAccount branchAccount;
 
 	// bi-directional many-to-one association to Purchase
 	@ManyToOne
@@ -134,6 +139,14 @@ public class CashBook extends com.wingcode.suppermarket.model.AuditModel {
 
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+
+	public BranchAccount getBranchAccount() {
+		return this.branchAccount;
+	}
+
+	public void setBranchAccount(BranchAccount branchAccount) {
+		this.branchAccount = branchAccount;
 	}
 
 	public Purchase getPurchase() {

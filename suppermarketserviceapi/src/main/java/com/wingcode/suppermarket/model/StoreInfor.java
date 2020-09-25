@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "store_infor")
 @NamedQuery(name = "StoreInfor.findAll", query = "SELECT s FROM StoreInfor s")
-public class StoreInfor extends com.wingcode.suppermarket.model.AuditModel {
+public class StoreInfor extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,10 +31,10 @@ public class StoreInfor extends com.wingcode.suppermarket.model.AuditModel {
 	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(name = "available_quantity", nullable = false, precision = 10, scale = 2)
+	@Column(name = "available_quantity", precision = 10, scale = 3)
 	private BigDecimal availableQuantity;
 
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(precision = 10, scale = 2)
 	private BigDecimal cost;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,7 +47,7 @@ public class StoreInfor extends com.wingcode.suppermarket.model.AuditModel {
 	@Column(name = "reorder_level", precision = 10, scale = 2)
 	private BigDecimal reorderLevel;
 
-	@Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
+	@Column(name = "retail_price", precision = 10, scale = 2)
 	private BigDecimal retailPrice;
 
 	@Temporal(TemporalType.TIMESTAMP)

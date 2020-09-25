@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "sale_item")
 @NamedQuery(name = "SaleItem.findAll", query = "SELECT s FROM SaleItem s")
-public class SaleItem extends com.wingcode.suppermarket.model.AuditModel {
+public class SaleItem extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class SaleItem extends com.wingcode.suppermarket.model.AuditModel {
 	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal profit;
 
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(nullable = false, precision = 10, scale = 3)
 	private BigDecimal quantity;
 
 	@Column(name = "real_amount", nullable = false, precision = 10, scale = 2)
