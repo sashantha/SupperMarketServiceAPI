@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wingcode.suppermarket.exception.InvalidDetailsException;
 import com.wingcode.suppermarket.exception.ResourceAlreadyExistException;
 import com.wingcode.suppermarket.exception.ResourceNotFoundException;
 import com.wingcode.suppermarket.model.Item;
 import com.wingcode.suppermarket.model.ItemCriteria;
 import com.wingcode.suppermarket.model.ItemGroup;
 import com.wingcode.suppermarket.model.ItemSubGroup;
+import com.wingcode.suppermarket.model.Measurement;
 import com.wingcode.suppermarket.model.StoreInfor;
+import com.wingcode.suppermarket.model.UnitOfMeasure;
 import com.wingcode.suppermarket.repository.ItemGroupRepository;
 import com.wingcode.suppermarket.repository.ItemRepository;
 import com.wingcode.suppermarket.repository.ItemSubGroupRepository;
@@ -262,10 +265,64 @@ public class ItemController {
 	 * Measure Rest Controls 
 	 */
 	
+	@GetMapping("/measures")
+	public List<Measurement> getAllMeasurement() {
+		return meRepo.findAll();
+	}
+	
+	@PostMapping("/measures")
+	public Measurement createMeasurement(@Valid @RequestBody Measurement m) {
+		if(m.getUnitName() == null) {
+			throw new InvalidDetailsException("Unit Name Found Empty");
+		}
+		m.setCreatedAt(new Date());
+		m.setUpdatedAt(new Date());
+		return meRepo.save(m);
+	}
+	
+	@PutMapping("/measures/{id}")
+	public Measurement updateMeasurement(@PathVariable(value = "id") Integer id, 
+			@Valid @RequestBody Measurement me) {
+		return meRepo.findById(id).map(m -> {
+			m.setUnitName(me.getUnitName());
+			m.setUpdatedAt(new Date());
+			return meRepo.save(m);
+		}).orElseThrow(() -> throwResourceNotFoundException("Measurement", id.toString()));
+	}
 	
 	/*
 	 * Unit Of Measure Rest Controls 
 	 */
+	
+	@GetMapping("/uoms")
+	public List<UnitOfMeasure> getAllUnitOdMeasure() {
+		return umRepo.findAll();
+	}
+	
+	@PostMapping("/uoms")
+	public UnitOfMeasure createUnitOfMeasure(@Valid @RequestBody UnitOfMeasure um) {
+		if(um.getMeasureType() == null) {
+			throw new InvalidDetailsException("Unit Type Found Empty");
+		}
+		um.setCreatedAt(new Date());
+		um.setUpdatedAt(new Date());
+		return umRepo.save(um);
+	}
+	
+	@PutMapping("/uoms/{id}")
+	public UnitOfMeasure updateUnitOfMeasure(@PathVariable(value = "id") Integer id, 
+			@Valid @RequestBody UnitOfMeasure um) {
+		return umRepo.findById(id).map(u -> {
+			u.setMeasureType(um.getMeasureType());
+			u.setPurchaseUnit(um.getPurchaseUnit());
+			u.setMeasureQuantity(um.getMeasureQuantity());
+			u.setMeasureUnit(um.getMeasureUnit());
+			u.setPerOneUnit(um.getPerOneUnit());
+			u.setSaleUnit(um.getSaleUnit());
+			u.setUpdatedAt(new Date());
+			return umRepo.save(u);
+		}).orElseThrow(() -> throwResourceNotFoundException("UnitOfMeasureId", id.toString()));
+	}
 	
 	private ResourceNotFoundException throwResourceNotFoundException(String proName, String id) {
 		return new ResourceNotFoundException(proName + " " + id + " not found");
