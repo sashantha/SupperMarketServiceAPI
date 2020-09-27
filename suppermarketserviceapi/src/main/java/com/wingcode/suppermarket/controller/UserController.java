@@ -73,6 +73,7 @@ public class UserController {
         	fu.setName(u.getName());
         	fu.setEmail(u.getEmail());
         	fu.setPassword(u.getPassword());
+        	fu.setUserRole(u.getUserRole());
     		u.setUpdatedAt(new Date());
             return usRepo.save(fu);
         }).orElseThrow(() -> throwResourceNotFoundException("UserId", userId.toString()));
