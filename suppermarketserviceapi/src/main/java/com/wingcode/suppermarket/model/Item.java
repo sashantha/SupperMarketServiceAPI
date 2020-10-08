@@ -2,7 +2,6 @@ package com.wingcode.suppermarket.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,10 +63,10 @@ public class Item extends AuditModel {
 	@JoinColumn(name = "item_sub_group_id", nullable = false)
 	private ItemSubGroup itemSubGroup;
 
-	// bi-directional one-to-one association to UnitOfMeasure
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "unit_of_measure_id", nullable = false)
-	private UnitOfMeasure unitOfMeasure;
+	// bi-directional many-to-one association to UnitOfMeasurement
+	@ManyToOne
+	@JoinColumn(name = "unit_of_measurement_id", nullable = false)
+	private UnitOfMeasurement unitOfMeasurement;
 
 	public Long getId() {
 		return this.id;
@@ -150,12 +148,12 @@ public class Item extends AuditModel {
 		this.itemSubGroup = itemSubGroup;
 	}
 
-	public UnitOfMeasure getUnitOfMeasure() {
-		return this.unitOfMeasure;
+		public UnitOfMeasurement getUnitOfMeasurement() {
+		return this.unitOfMeasurement;
 	}
 
-	public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
-		this.unitOfMeasure = unitOfMeasure;
+	public void setUnitOfMeasurement(UnitOfMeasurement unitOfMeasurement) {
+		this.unitOfMeasurement = unitOfMeasurement;
 	}
 
 }

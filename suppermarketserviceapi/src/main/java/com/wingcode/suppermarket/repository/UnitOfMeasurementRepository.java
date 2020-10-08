@@ -3,8 +3,8 @@ package com.wingcode.suppermarket.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.wingcode.suppermarket.model.UnitOfMeasure;
+import com.wingcode.suppermarket.model.UnitOfMeasurement;
 
 @Repository
-public interface UnitOfMeasureRepository extends JpaRepository<UnitOfMeasure, Integer>{
+public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasurement, Integer>{
 }

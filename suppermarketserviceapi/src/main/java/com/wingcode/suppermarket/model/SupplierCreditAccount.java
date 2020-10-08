@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,10 +40,6 @@ public class SupplierCreditAccount extends AuditModel {
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 
-	// bi-directional one-to-one association to Supplier
-	@OneToOne(mappedBy = "supplierCreditAccount")
-	private Supplier supplier;
-
 	public Long getId() {
 		return this.id;
 	}
@@ -75,14 +70,6 @@ public class SupplierCreditAccount extends AuditModel {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Supplier getSupplier() {
-		return this.supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
 	}
 
 }

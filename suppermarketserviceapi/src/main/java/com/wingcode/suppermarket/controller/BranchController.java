@@ -85,7 +85,7 @@ public class BranchController {
 	 */
 	
 	@GetMapping("/brancheacs/{id}")
-	public List<BranchAccount> getAccountByBranchId(Integer id) {
+	public List<BranchAccount> getAccountByBranchId(@PathVariable(value = "id") Integer id) {
 		return arepo.findByBranchId(id);
 	}
 	

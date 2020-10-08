@@ -30,7 +30,7 @@ public class BranchAccount extends AuditModel {
 	@Column(unique = true, nullable = false)
 	private int id;
 
-	@Column(name = "account_no", nullable = false, length = 45)
+	@Column(name = "account_no", length = 45)
 	private String accountNo;
 
 	@Temporal(TemporalType.TIMESTAMP)

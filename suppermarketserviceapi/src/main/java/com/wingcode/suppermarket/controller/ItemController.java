@@ -23,15 +23,15 @@ import com.wingcode.suppermarket.model.Item;
 import com.wingcode.suppermarket.model.ItemCriteria;
 import com.wingcode.suppermarket.model.ItemGroup;
 import com.wingcode.suppermarket.model.ItemSubGroup;
-import com.wingcode.suppermarket.model.Measurement;
 import com.wingcode.suppermarket.model.StoreInfor;
-import com.wingcode.suppermarket.model.UnitOfMeasure;
+import com.wingcode.suppermarket.model.Unit;
+import com.wingcode.suppermarket.model.UnitOfMeasurement;
 import com.wingcode.suppermarket.repository.ItemGroupRepository;
 import com.wingcode.suppermarket.repository.ItemRepository;
 import com.wingcode.suppermarket.repository.ItemSubGroupRepository;
-import com.wingcode.suppermarket.repository.MeasurementRepository;
 import com.wingcode.suppermarket.repository.StoreInforRepository;
-import com.wingcode.suppermarket.repository.UnitOfMeasureRepository;
+import com.wingcode.suppermarket.repository.UnitOfMeasurementRepository;
+import com.wingcode.suppermarket.repository.UnitRepository;
 
 @RestController
 @RequestMapping("item/api/v1")
@@ -50,10 +50,10 @@ public class ItemController {
 	private StoreInforRepository siRepo;
 
 	@Autowired
-	private MeasurementRepository meRepo;
+	private UnitRepository unRepo;
 	
 	@Autowired
-	private UnitOfMeasureRepository umRepo;
+	private UnitOfMeasurementRepository umRepo;
 	
 	/*
 	 * Item Group Rest Controls 
@@ -265,28 +265,30 @@ public class ItemController {
 	 * Measure Rest Controls 
 	 */
 	
-	@GetMapping("/measures")
-	public List<Measurement> getAllMeasurement() {
-		return meRepo.findAll();
+	@GetMapping("/units")
+	public List<Unit> getAllMeasurement() {
+		return unRepo.findAll();
 	}
 	
-	@PostMapping("/measures")
-	public Measurement createMeasurement(@Valid @RequestBody Measurement m) {
+	@PostMapping("/units")
+	public Unit createMeasurement(@Valid @RequestBody Unit m) {
 		if(m.getUnitName() == null) {
 			throw new InvalidDetailsException("Unit Name Found Empty");
 		}
 		m.setCreatedAt(new Date());
 		m.setUpdatedAt(new Date());
-		return meRepo.save(m);
+		return unRepo.save(m);
 	}
 	
-	@PutMapping("/measures/{id}")
-	public Measurement updateMeasurement(@PathVariable(value = "id") Integer id, 
-			@Valid @RequestBody Measurement me) {
-		return meRepo.findById(id).map(m -> {
+	@PutMapping("/units/{id}")
+	public Unit updateMeasurement(@PathVariable(value = "id") Integer id, 
+			@Valid @RequestBody Unit me) {
+		return unRepo.findById(id).map(m -> {
 			m.setUnitName(me.getUnitName());
+			m.setUnitType(me.getUnitType());
+			m.setAbbreviation(me.getAbbreviation());
 			m.setUpdatedAt(new Date());
-			return meRepo.save(m);
+			return unRepo.save(m);
 		}).orElseThrow(() -> throwResourceNotFoundException("Measurement", id.toString()));
 	}
 	
@@ -295,13 +297,13 @@ public class ItemController {
 	 */
 	
 	@GetMapping("/uoms")
-	public List<UnitOfMeasure> getAllUnitOdMeasure() {
+	public List<UnitOfMeasurement> getAllUnitOdMeasure() {
 		return umRepo.findAll();
 	}
 	
 	@PostMapping("/uoms")
-	public UnitOfMeasure createUnitOfMeasure(@Valid @RequestBody UnitOfMeasure um) {
-		if(um.getMeasureType() == null) {
+	public UnitOfMeasurement createUnitOfMeasure(@Valid @RequestBody UnitOfMeasurement um) {
+		if(um.getUnitDescription() == null) {
 			throw new InvalidDetailsException("Unit Type Found Empty");
 		}
 		um.setCreatedAt(new Date());
@@ -310,15 +312,23 @@ public class ItemController {
 	}
 	
 	@PutMapping("/uoms/{id}")
-	public UnitOfMeasure updateUnitOfMeasure(@PathVariable(value = "id") Integer id, 
-			@Valid @RequestBody UnitOfMeasure um) {
+	public UnitOfMeasurement updateUnitOfMeasure(@PathVariable(value = "id") Integer id, 
+			@Valid @RequestBody UnitOfMeasurement um) {
 		return umRepo.findById(id).map(u -> {
-			u.setMeasureType(um.getMeasureType());
-			u.setPurchaseUnit(um.getPurchaseUnit());
-			u.setMeasureQuantity(um.getMeasureQuantity());
-			u.setMeasureUnit(um.getMeasureUnit());
-			u.setPerOneUnit(um.getPerOneUnit());
-			u.setSaleUnit(um.getSaleUnit());
+			u.setUnitDescription(um.getUnitDescription());
+			u.setUnitType(um.getUnitType());
+			u.setBaseUnitName(um.getBaseUnitName());
+			u.setBasePrecision(um.getBasePrecision());
+			u.setBaseRatio(um.getBaseRatio());
+			u.setPurchaseUnitName(um.getPurchaseUnitName());
+			u.setPurchasePrecision(um.getPurchasePrecision());
+			u.setPurchasePrecisionUnitName(um.getPurchasePrecisionUnitName());
+			u.setBaseRatioToPurchase(um.getBaseRatioToPurchase());
+			u.setPurchaseQuantifyValue(um.getPurchaseQuantifyValue());
+			u.setSaleUnitName(um.getSaleUnitName());
+			u.setSalePrecision(um.getSalePrecision());
+			u.setBaseRatioToSale(um.getBaseRatioToSale());
+			u.setSaleOtherUnitName(um.getSaleOtherUnitName());
 			u.setUpdatedAt(new Date());
 			return umRepo.save(u);
 		}).orElseThrow(() -> throwResourceNotFoundException("UnitOfMeasureId", id.toString()));

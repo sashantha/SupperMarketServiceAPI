@@ -48,6 +48,9 @@ public class CustomerCreditInvoice extends AuditModel {
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 
+	@Column(name = "due_days")
+	private int dueDays;
+
 	// bi-directional many-to-one association to CustomerCreditAccount
 	@ManyToOne
 	@JoinColumn(name = "customer_credit_account_id", nullable = false)
@@ -120,6 +123,14 @@ public class CustomerCreditInvoice extends AuditModel {
 
 	public void setSaleInvoice(SaleInvoice saleInvoice) {
 		this.saleInvoice = saleInvoice;
+	}
+
+	public int getDueDays() {
+		return dueDays;
+	}
+
+	public void setDueDays(int dueDays) {
+		this.dueDays = dueDays;
 	}
 
 }

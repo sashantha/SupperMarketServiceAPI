@@ -3,14 +3,12 @@ package com.wingcode.suppermarket.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "customer_credit_account")
 @NamedQuery(name = "CustomerCreditAccount.findAll", query = "SELECT c FROM CustomerCreditAccount c")
 public class CustomerCreditAccount extends AuditModel {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -41,10 +39,6 @@ public class CustomerCreditAccount extends AuditModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
-
-	// bi-directional one-to-one association to Customer
-	@OneToOne(mappedBy = "customerCreditAccount", cascade = { CascadeType.ALL })
-	private Customer customer;
 
 	public Long getId() {
 		return this.id;
@@ -76,14 +70,6 @@ public class CustomerCreditAccount extends AuditModel {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 }

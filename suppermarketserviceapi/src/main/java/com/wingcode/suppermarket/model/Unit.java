@@ -13,13 +13,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * The persistent class for the measurement database table.
+ * The persistent class for the unit database table.
  * 
  */
 @Entity
-@Table(name = "measurement")
-@NamedQuery(name = "Measurement.findAll", query = "SELECT m FROM Measurement m")
-public class Measurement extends AuditModel {
+@Table(name = "unit")
+@NamedQuery(name = "Unit.findAll", query = "SELECT u FROM Unit u")
+public class Unit extends AuditModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +28,18 @@ public class Measurement extends AuditModel {
 	@Column(unique = true, nullable = false)
 	private int id;
 
+	@Column(nullable = false, length = 100)
+	private String abbreviation;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 
 	@Column(name = "unit_name", nullable = false, length = 20)
 	private String unitName;
+
+	@Column(name = "unit_type", nullable = false, length = 45)
+	private String unitType;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
@@ -45,6 +51,14 @@ public class Measurement extends AuditModel {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getAbbreviation() {
+		return this.abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
 	}
 
 	public Date getCreatedAt() {
@@ -61,6 +75,14 @@ public class Measurement extends AuditModel {
 
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+
+	public String getUnitType() {
+		return this.unitType;
+	}
+
+	public void setUnitType(String unitType) {
+		this.unitType = unitType;
 	}
 
 	public Date getUpdatedAt() {

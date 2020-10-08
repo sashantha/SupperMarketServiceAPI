@@ -72,7 +72,7 @@ public class ChequeBook extends AuditModel {
 
 	// bi-directional many-to-one association to BranchAccount
 	@ManyToOne
-	@JoinColumn(name = "branch_account_id", nullable = false)
+	@JoinColumn(name = "branch_account_id")
 	private BranchAccount branchAccount;
 
 	// bi-directional many-to-one association to Purchase
