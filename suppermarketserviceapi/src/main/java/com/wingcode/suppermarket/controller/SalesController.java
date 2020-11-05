@@ -24,7 +24,7 @@ import com.wingcode.suppermarket.repository.SaleInvoiceRepository;
 import com.wingcode.suppermarket.repository.SaleItemRepository;
 
 @RestController
-@RequestMapping("Selling/api/v1")
+@RequestMapping("selling/api/v1")
 public class SalesController {
 
 	@Autowired
@@ -68,14 +68,20 @@ public class SalesController {
 	@PutMapping("/sales/item/{id}")
 	public SaleItem updateSaleItem(@PathVariable(value = "id") Long id, @Valid @RequestBody SaleItem si) {
 		return siRepo.findById(id).map(s -> {
-			s.setCost(si.getCost());
-			s.setSalePrice(si.getSalePrice());
-			s.setDiscount(si.getDiscount());
-			s.setQuantity(si.getQuantity());
 			s.setAmount(si.getAmount());
-			s.setRealAmount(s.getRealAmount());
+			s.setCost(si.getCost());
+			s.setDiscount(si.getDiscount());
+			s.setIssueNo(si.getIssueNo());
+			s.setNetAmount(si.getNetAmount());
 			s.setProfit(si.getProfit());
-			s.setNetAmount(s.getNetAmount());
+			s.setQuantity(si.getQuantity());
+			s.setSaleUnit(si.getSaleUnit());
+			s.setRealAmount(si.getRealAmount());
+			s.setSaleDate(si.getSaleDate());
+			s.setSalePrice(si.getSalePrice());
+			s.setRecordState(si.getRecordState());
+			s.setDefectQuantity(si.getDefectQuantity());
+			s.setDefectState(si.getDefectState());
 			s.setItem(si.getItem());
 			s.setUpdatedAt(new Date());
 			return siRepo.save(s);
@@ -94,13 +100,31 @@ public class SalesController {
 	 * Sale Invoice Rest Controls 
 	 */
 	
-	@GetMapping("/sales/{bid}/{invoiceDate}")
+	@GetMapping("/sales/inv/{bid}/{id}")
+	public SaleInvoice getSaleInvoiceById(@PathVariable(value = "id") Integer bid, 
+			@PathVariable(value = "invNo") Long invNo) {
+		return slRepo.findById(bid, invNo);
+	}
+	
+	@GetMapping("/sales/invNo/{bid}/{invNo}")
+	public SaleInvoice getSaleInvoiceByNo(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "invNo") String invNo) {
+		return slRepo.findByInvoiceNo(bid, invNo);
+	}
+		
+	@GetMapping("/sales/invDate/{bid}/{invoiceDate}")
 	public List<SaleInvoice> getAllSaleInvoiceByDate(@PathVariable(value = "bid") Integer bid, 
 			@PathVariable(value = "invoiceDate") Date invoiceDate) {
 		return slRepo.findByInvoiceDate(bid, invoiceDate);
 	}
+	
+	@GetMapping("/sales/invType/{bid}/{invType}")
+	public List<SaleInvoice> getAllSaleInvoiceByType(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "invType") String invType) {
+		return slRepo.findByInvoiceType(bid, invType);
+	}
 
-	@GetMapping("/sales/{bid}/{invoiceDate}/{userId}")
+	@GetMapping("/sales/invDate/{bid}/{invoiceDate}/{userId}")
 	public List<SaleInvoice> getAllInvoiceByDateAndUser(@PathVariable(value = "bid") Integer bid, 
 			@PathVariable(value = "invoiceDate") Date invoiceDate,
 			@PathVariable(value = "userId") Integer userId) {
@@ -119,7 +143,27 @@ public class SalesController {
 			@PathVariable(value = "customerId") Long customerId) {
 		return slRepo.findByInvoiceDateAndCustomerId(bid, invoiceDate, customerId);
 	}
+	
+	@GetMapping("/sales/daymonths/{bid}/{sday}/{smonth}")
+	public List<SaleInvoice> getAllSaleInvoiceByDayAndMonth(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "sday") Integer sday, 
+			@PathVariable(value = "smonth") Integer smonth) {
+		return slRepo.findBySaleDayAndSaleMonth(bid, sday, smonth);				
+	}	
 
+	@GetMapping("/sales/monthyears/{bid}/{smonth}/{syear}")
+	public List<SaleInvoice> getAllSaleInvoiceByMonthAndYear(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "smonth") Integer smonth, 
+			@PathVariable(value = "syear") Integer syear) {
+		return slRepo.findBySaleMonthAndSaleYear(bid, smonth, syear);			
+	}		
+	
+	@GetMapping("/sales/years/{bid}/{syear}")
+	public List<SaleInvoice> getAllSaleInvoiceByYear(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "syear") Integer syear) {
+		return slRepo.findBySaleYear(bid, syear);			
+	}
+	
 	@PostMapping("/sales")
 	public SaleInvoice createSaleInvoice(@Valid @RequestBody SaleInvoice sl) {
 		sl.setCreatedAt(new Date());
@@ -134,22 +178,23 @@ public class SalesController {
 			if (s.getInvoiceNo() == null) {
 				s.setInvoiceNo(sl.getInvoiceNo());
 			}
-			s.setInvoiceDate(sl.getInvoiceDate());
-			s.setSaleType(sl.getSaleType());
-			s.setTotalCost(sl.getTotalCost());
-			s.setTotalAmount(sl.getTotalAmount());
-			s.setTotalDiscount(sl.getTotalDiscount());
-			s.setInvoiceDiscount(sl.getInvoiceDiscount());
-			s.setNetAmount(sl.getNetAmount());
-			s.setPaidAmount(sl.getPaidAmount());
 			s.setBalanceAmount(sl.getBalanceAmount());
 			s.setCreditAmount(sl.getCreditAmount());
-			s.setPayMethod(sl.getPayMethod());
-			s.setTotalProfit(sl.getTotalProfit());
-			s.setSaleItem(sl.getSaleItem());
-			s.setInvoiceType(sl.getInvoiceType());
+			s.setInvoiceDate(sl.getInvoiceDate());
+			s.setInvoiceDiscount(sl.getInvoiceDiscount());
 			s.setInvoiceState(sl.getInvoiceState());
+			s.setInvoiceType(sl.getInvoiceType());
+			s.setNetAmount(sl.getNetAmount());
+			s.setPaidAmount(sl.getPaidAmount());
+			s.setPayMethod(sl.getPayMethod());
 			s.setRecordState(sl.getRecordState());
+			s.setSaleItem(sl.getSaleItem());
+			s.setSaleType(sl.getSaleType());
+			s.setTotalCost(sl.getTotalCost());
+			s.setTotalDiscount(sl.getTotalDiscount());
+			s.setTotalAmount(sl.getTotalAmount());
+			s.setTotalProfit(sl.getTotalProfit());
+			s.setCustomer(sl.getCustomer());
 			s.setUpdatedAt(new Date());
 			return slRepo.save(s);
 		}).orElseThrow(() -> throwResourceNotFoundException("SaleId", saleId.toString()));
@@ -157,10 +202,10 @@ public class SalesController {
 	}
 
 	@DeleteMapping("/sales/{saleId}")
-	public SaleInvoice deleteSaleInvoice(Long saleId) {
+	public ResponseEntity<?> deleteSaleInvoice(@PathVariable(value = "saleId") Long saleId) {
 		return slRepo.findById(saleId).map(s -> {
-			s.setRecordState("cancel");
-			return slRepo.save(s);
+			slRepo.delete(s);
+			return ResponseEntity.ok(1);
 		}).orElseThrow(() -> throwResourceNotFoundException("SaleId", saleId.toString()));
 	}
 

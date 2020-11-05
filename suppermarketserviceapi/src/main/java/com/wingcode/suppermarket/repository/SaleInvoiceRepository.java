@@ -12,6 +12,8 @@ import com.wingcode.suppermarket.model.SaleInvoice;
 @Repository
 public interface SaleInvoiceRepository extends JpaRepository<SaleInvoice, Long>{
 	
+	@Query("select s from SaleInvoice s join s.branch b where b.id = ?1 and s.id = ?2 and s.recordState ='fine'")
+	SaleInvoice findById(Integer bid, Long id);
 	
 	@Query("select s from SaleInvoice s join s.branch b where b.id = ?1 and s.invoiceNo = ?2 and s.recordState ='fine'")
 	SaleInvoice findByInvoiceNo(Integer bid, String invoiceNo);
@@ -27,6 +29,9 @@ public interface SaleInvoiceRepository extends JpaRepository<SaleInvoice, Long>{
 	
 	@Query("select s from SaleInvoice s join s.branch b where b.id = ?1 and month(s.invoiceDate) = ?2 and year(s.invoiceDate) = ?3 and s.recordState ='fine'")
 	List<SaleInvoice> findBySaleMonthAndSaleYear(Integer bid, Integer saleMonth, Integer saleYear);
+	
+	@Query("select s from SaleInvoice s join s.branch b where b.id = ?1 and year(s.invoiceDate) = ?2 and s.recordState ='fine'")
+	List<SaleInvoice> findBySaleYear(Integer bid, Integer saleYear);
 	
 	@Query("select s from SaleInvoice s join s.user u join s.branch b where b.id = ?1 and u.id = ?3 and s.invoiceDate = ?2 and s.recordState ='fine'")
 	List<SaleInvoice> findByInvoiceDateAndUserId(Integer bid, Date invoiceDate, Integer userId);
