@@ -41,6 +41,12 @@ public class SaleItem extends AuditModel {
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 
+	@Column(name = "defect_quantity", precision = 10, scale = 3)
+	private BigDecimal defectQuantity;
+
+	@Column(name = "defect_state", length = 20)
+	private String defectState;
+
 	@Column(precision = 10, scale = 2)
 	private BigDecimal discount;
 
@@ -59,12 +65,21 @@ public class SaleItem extends AuditModel {
 	@Column(name = "real_amount", nullable = false, precision = 10, scale = 2)
 	private BigDecimal realAmount;
 
+	@Column(name = "record_state", nullable = false, length = 20)
+	private String recordState;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "sale_date", nullable = false)
 	private Date saleDate;
 
 	@Column(name = "sale_price", nullable = false, precision = 10, scale = 2)
 	private BigDecimal salePrice;
+
+	@Column(name = "sale_unit", nullable = false, length = 20)
+	private String saleUnit;
+
+	@Column(name = "total_cost", nullable = false, precision = 10, scale = 2)
+	private BigDecimal totalCost;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
@@ -110,6 +125,22 @@ public class SaleItem extends AuditModel {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public BigDecimal getDefectQuantity() {
+		return this.defectQuantity;
+	}
+
+	public void setDefectQuantity(BigDecimal defectQuantity) {
+		this.defectQuantity = defectQuantity;
+	}
+
+	public String getDefectState() {
+		return this.defectState;
+	}
+
+	public void setDefectState(String defectState) {
+		this.defectState = defectState;
 	}
 
 	public BigDecimal getDiscount() {
@@ -160,6 +191,14 @@ public class SaleItem extends AuditModel {
 		this.realAmount = realAmount;
 	}
 
+	public String getRecordState() {
+		return this.recordState;
+	}
+
+	public void setRecordState(String recordState) {
+		this.recordState = recordState;
+	}
+
 	public Date getSaleDate() {
 		return this.saleDate;
 	}
@@ -174,6 +213,22 @@ public class SaleItem extends AuditModel {
 
 	public void setSalePrice(BigDecimal salePrice) {
 		this.salePrice = salePrice;
+	}
+
+	public String getSaleUnit() {
+		return this.saleUnit;
+	}
+
+	public void setSaleUnit(String saleUnit) {
+		this.saleUnit = saleUnit;
+	}
+
+	public BigDecimal getTotalCost() {
+		return this.totalCost;
+	}
+
+	public void setTotalCost(BigDecimal totalCost) {
+		this.totalCost = totalCost;
 	}
 
 	public Date getUpdatedAt() {

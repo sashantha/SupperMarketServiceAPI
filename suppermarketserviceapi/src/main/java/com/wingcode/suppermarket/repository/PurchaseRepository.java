@@ -12,24 +12,24 @@ import com.wingcode.suppermarket.model.Purchase;
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
-	@Query("select p from Purchase p join p.supplier s where s.id = ?1 and not p.recordState = 'cancel'")
-	List<Purchase> findBySuplierId(Long supplierId);
+	@Query("select p from Purchase p join p.supplier s join p.branch b where b.id = ?1 and s.id = ?2 and p.recordState = 'fine'")
+	List<Purchase> findBySuplierId(Integer bid, Long supplierId);
 
-	@Query("select p from Purchase p where p.invoiceNo = ?1 and not p.recordState = 'cancel'")
-	Purchase findByInvoiceNo(String invoiceNo);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.invoiceNo = ?2 and p.recordState = 'fine'")
+	Purchase findByInvoiceNo(Integer bid, String invoiceNo);
 
-	@Query("select p from Purchase p where p.id = ?1 and not p.recordState = 'cancel'")
-	Purchase findByPurchaseId(Long id);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.id = ?2 and p.recordState = 'fine'")
+	Purchase findByPurchaseId(Integer bid, Long id);
 	
-	@Query("select p from Purchase p where p.purchaseDate = ?1 and not p.recordState = 'cancel'")
-	List<Purchase> findByPurchaseDate(Date purchaseDate);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.purchaseDate = ?2 and p.recordState = 'fine'")
+	List<Purchase> findByPurchaseDate(Integer bid, Date purchaseDate);
 
-	@Query("select p from Purchase p where day(p.purchaseDate) = ?1 and month(p.purchaseDate) = ?2 and not p.recordState = 'cancel'")
-	List<Purchase> findByPurchaseDayAndMonth(Integer purchaseDay, Integer purchaseMonth);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and day(p.purchaseDate) = ?2 and month(p.purchaseDate) = ?3 and p.recordState = 'fine'")
+	List<Purchase> findByPurchaseDayAndMonth(Integer bid, Integer purchaseDay, Integer purchaseMonth);
 
-	@Query("select p from Purchase p where month(p.purchaseDate) = ?1 and year(p.purchaseDate) = ?2 and not p.recordState = 'cancel'")
-	List<Purchase> findByPurchaseMonth(Integer purchaseMonth, Integer purchaseYear);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and month(p.purchaseDate) = ?2 and year(p.purchaseDate) = ?3 and p.recordState = 'fine'")
+	List<Purchase> findByPurchaseMonth(Integer bid, Integer purchaseMonth, Integer purchaseYear);
 
-	@Query("select p from Purchase p where year(p.purchaseDate) = ?1 and not p.recordState = 'cancel'")
-	List<Purchase> findByPurchaseYear(Integer purchaseYear);
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and year(p.purchaseDate) = ?2 and p.recordState = 'fine'")
+	List<Purchase> findByPurchaseYear(Integer bid, Integer purchaseYear);
 }

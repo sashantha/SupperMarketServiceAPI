@@ -12,11 +12,12 @@ import com.wingcode.suppermarket.model.SaleItem;
 @Repository
 public interface SaleItemRepository extends JpaRepository<SaleItem, Long> {
 
-	List<SaleItem> findBySaleDate(Date saleDate);
+	@Query("select i from SaleItem i join i.saleInvoice s join s.branch b where b.id = ?1 and i.saleDate = ?2 and i.recordState = 'fine'")
+	List<SaleItem> findBySaleDate(Integer bid, Date saleDate);
 
-	@Query("select i from SaleItem i join i.saleInvoice s where s.id = ?1")
-	List<SaleItem> findByInvoiceId(Long invoiceId);
+	@Query("select i from SaleItem i join i.saleInvoice s join s.branch b where b.id = ?1 and s.id = ?2 and i.recordState = 'fine'")
+	List<SaleItem> findByInvoiceId(Integer bid, Long invoiceId);
 
-	@Query("select i from SaleItem i join i.item t where t.id = ?1")
-	List<SaleItem> findByItemId(Long itemId);
+	@Query("select i from SaleItem i join i.item t join i.saleInvoice s join s.branch b where b.id = ?1 and t.id = ?2 and i.recordState = 'fine'")
+	List<SaleItem> findByItemId(Integer bid, Long itemId);
 }

@@ -37,19 +37,22 @@ public class SalesController {
 	 * Sale Item Rest Controls 
 	 */
 	
-	@GetMapping("/sales/item/{saleDate}")
-	public List<SaleItem> getSaleItemsByDate(@PathVariable(value = "saleDate") Date saleDate) {
-		return siRepo.findBySaleDate(saleDate);
+	@GetMapping("/sales/item/{bid}/{saleDate}")
+	public List<SaleItem> getSaleItemsByDate(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "saleDate") Date saleDate) {
+		return siRepo.findBySaleDate(bid, saleDate);
 	}
 
-	@GetMapping("/sales/item/inv/{id}")
-	public List<SaleItem> getSaleItemsByInvoiceId(@PathVariable(value = "id") Long id) {
-		return siRepo.findByInvoiceId(id);
+	@GetMapping("/sales/item/inv/{bid}/{id}")
+	public List<SaleItem> getSaleItemsByInvoiceId(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "id") Long id) {
+		return siRepo.findByInvoiceId(bid, id);
 	}
 	
-	@GetMapping("/sales/item/items/{id}")
-	public List<SaleItem> getSaleItemsByItemId(@PathVariable(value = "id") Long id) {
-		return siRepo.findByItemId(id);
+	@GetMapping("/sales/item/items/{bid}/{id}")
+	public List<SaleItem> getSaleItemsByItemId(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "id") Long id) {
+		return siRepo.findByItemId(bid, id);
 	}	
 	
 	@PostMapping("/sales/item")
@@ -91,26 +94,30 @@ public class SalesController {
 	 * Sale Invoice Rest Controls 
 	 */
 	
-	@GetMapping("/sales/{invoiceDate}")
-	public List<SaleInvoice> getAllSaleInvoiceByDate(@PathVariable(value = "invoiceDate") Date invoiceDate) {
-		return slRepo.findByInvoiceDate(invoiceDate);
+	@GetMapping("/sales/{bid}/{invoiceDate}")
+	public List<SaleInvoice> getAllSaleInvoiceByDate(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "invoiceDate") Date invoiceDate) {
+		return slRepo.findByInvoiceDate(bid, invoiceDate);
 	}
 
-	@GetMapping("/sales/{invoiceDate}/{userId}")
-	public List<SaleInvoice> getAllInvoiceByDateAndUser(@PathVariable(value = "invoiceDate") Date invoiceDate,
-
+	@GetMapping("/sales/{bid}/{invoiceDate}/{userId}")
+	public List<SaleInvoice> getAllInvoiceByDateAndUser(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "invoiceDate") Date invoiceDate,
 			@PathVariable(value = "userId") Integer userId) {
-		return slRepo.findByInvoiceDateAndUserId(invoiceDate, userId);
+		return slRepo.findByInvoiceDateAndUserId(bid, invoiceDate, userId);
 	}
 
-	@GetMapping("/sales/customer/{customerId}")
-	public List<SaleInvoice> getAllSaleInvoiceByCustomer(@PathVariable(value = "customerId") Long customerId) {
-		return slRepo.findByCustomerId(customerId);
+	@GetMapping("/sales/customer/{bid}/{customerId}")
+	public List<SaleInvoice> getAllSaleInvoiceByCustomer(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "customerId") Long customerId) {
+		return slRepo.findByCustomerId(bid, customerId);
 	}
 
-	@GetMapping("/sales/customer/{invoiceDate}/{customerId}")
-	public List<SaleInvoice> getAllSaleInvoiceByDateAndCustomer(Date invoiceDate, Long customerId) {
-		return slRepo.findByInvoiceDateAndCustomerId(invoiceDate, customerId);
+	@GetMapping("/sales/customer/{bid}/{invoiceDate}/{customerId}")
+	public List<SaleInvoice> getAllSaleInvoiceByDateAndCustomer(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "invoiceDate") Date invoiceDate, 
+			@PathVariable(value = "customerId") Long customerId) {
+		return slRepo.findByInvoiceDateAndCustomerId(bid, invoiceDate, customerId);
 	}
 
 	@PostMapping("/sales")

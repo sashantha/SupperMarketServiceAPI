@@ -200,6 +200,7 @@ public class ItemController {
 			i.setOtherName(it.getOtherName());
 			i.setItemGroup(it.getItemGroup());
 			i.setItemSubGroup(it.getItemSubGroup());
+			i.setUnitOfMeasurement(it.getUnitOfMeasurement());
 			i.setUpdatedAt(new Date());
 			return itRepo.save(i);
 		}).orElseThrow(() -> throwResourceNotFoundException("ItemId", id.toString()));
@@ -266,12 +267,23 @@ public class ItemController {
 	 */
 	
 	@GetMapping("/units")
-	public List<Unit> getAllMeasurement() {
+	public List<Unit> getAllUnit() {
 		return unRepo.findAll();
 	}
 	
+	@GetMapping("/units/type/{utype}")
+	public List<Unit> getAllUnitByType(@PathVariable(value = "utype") String utype) {
+		return unRepo.findByUnitType(utype);
+	}
+	
+	@GetMapping("/units/name/{nam}")
+	public Unit getAllUnitByName(@PathVariable(value = "nam") String nam) {
+		return unRepo.findByUnitName(nam);
+	}
+	
+	
 	@PostMapping("/units")
-	public Unit createMeasurement(@Valid @RequestBody Unit m) {
+	public Unit createUnit(@Valid @RequestBody Unit m) {
 		if(m.getUnitName() == null) {
 			throw new InvalidDetailsException("Unit Name Found Empty");
 		}
@@ -281,7 +293,7 @@ public class ItemController {
 	}
 	
 	@PutMapping("/units/{id}")
-	public Unit updateMeasurement(@PathVariable(value = "id") Integer id, 
+	public Unit updateUnit(@PathVariable(value = "id") Integer id, 
 			@Valid @RequestBody Unit me) {
 		return unRepo.findById(id).map(m -> {
 			m.setUnitName(me.getUnitName());
@@ -301,10 +313,21 @@ public class ItemController {
 		return umRepo.findAll();
 	}
 	
+	@GetMapping("/uoms/type/{utype}")
+	public List<UnitOfMeasurement> getAllUnitOfMeasureByType(@PathVariable(value = "utype") String utype) {
+		return umRepo.findByUnitType(utype);
+	}
+	
+	@GetMapping("/uoms/description/{decs}")
+	public UnitOfMeasurement getAllUnitUnitOfMeasureByDescription(@PathVariable(value = "decs") String decs) {
+		return umRepo.findByUnitDescription(decs);
+	}
+	
+	
 	@PostMapping("/uoms")
 	public UnitOfMeasurement createUnitOfMeasure(@Valid @RequestBody UnitOfMeasurement um) {
 		if(um.getUnitDescription() == null) {
-			throw new InvalidDetailsException("Unit Type Found Empty");
+			throw new InvalidDetailsException("Unit Description Found Empty");
 		}
 		um.setCreatedAt(new Date());
 		um.setUpdatedAt(new Date());

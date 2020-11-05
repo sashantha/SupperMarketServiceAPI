@@ -41,8 +41,8 @@ public class Purchase extends AuditModel {
 	@Column(name = "credit_amount", nullable = false, precision = 10, scale = 2)
 	private BigDecimal creditAmount;
 
-	@Column(name = "discount_percent", nullable = false)
-	private double discountPercent;
+	@Column(name = "discount_percent", nullable = false, precision = 10, scale = 2)
+	private BigDecimal discountPercent;
 
 	@Column(name = "invoice_amount", nullable = false, precision = 10, scale = 2)
 	private BigDecimal invoiceAmount;
@@ -126,11 +126,11 @@ public class Purchase extends AuditModel {
 		this.creditAmount = creditAmount;
 	}
 
-	public double getDiscountPercent() {
+	public BigDecimal getDiscountPercent() {
 		return this.discountPercent;
 	}
 
-	public void setDiscountPercent(double discountPercent) {
+	public void setDiscountPercent(BigDecimal discountPercent) {
 		this.discountPercent = discountPercent;
 	}
 
