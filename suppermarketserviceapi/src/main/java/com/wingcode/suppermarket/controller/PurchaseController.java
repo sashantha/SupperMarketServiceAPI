@@ -124,7 +124,7 @@ public class PurchaseController {
 		return purRepo.findByPurchaseId(bid, id);
 	}
 
-	@GetMapping("/purchases/Invoices/{bid}/{inv}")
+	@GetMapping("/purchases/invs/{bid}/{inv}")
 	public Purchase getPurchaseByPurchaseInvoiceNo(@PathVariable(value = "bid") Integer bid, 
 			@PathVariable(value = "inv") String inv) {
 		return purRepo.findByInvoiceNo(bid, inv);
