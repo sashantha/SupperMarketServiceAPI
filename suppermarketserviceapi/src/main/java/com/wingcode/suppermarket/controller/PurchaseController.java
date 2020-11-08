@@ -129,6 +129,12 @@ public class PurchaseController {
 			@PathVariable(value = "inv") String inv) {
 		return purRepo.findByInvoiceNo(bid, inv);
 	}
+	
+	@GetMapping("/purchases/invs/{bid}/{inv}/{rst}")
+	public Purchase getPurchaseByPurchaseInvoiceNoAndRecordSt(@PathVariable(value = "bid") Integer bid, 
+			@PathVariable(value = "inv") String inv, @PathVariable(value = "rst") String rst) {
+		return purRepo.findByInvoiceNoAndRecordSt(bid, inv, rst);
+	}
 
 	@GetMapping("/purchases/dates/{bid}/{date}")
 	public List<Purchase> getPurchaseByDate(@PathVariable(value = "bid") Integer bid, 

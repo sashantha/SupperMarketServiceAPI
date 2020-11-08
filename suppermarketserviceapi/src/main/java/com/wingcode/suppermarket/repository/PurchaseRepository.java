@@ -18,6 +18,9 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.invoiceNo = ?2 and p.recordState = 'fine'")
 	Purchase findByInvoiceNo(Integer bid, String invoiceNo);
 
+	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.invoiceNo = ?2 and p.recordState = ?3")
+	Purchase findByInvoiceNoAndRecordSt(Integer bid, String invoiceNo, String rst);
+	
 	@Query("select p from Purchase p join p.branch b where b.id = ?1 and p.id = ?2 and p.recordState = 'fine'")
 	Purchase findByPurchaseId(Integer bid, Long id);
 	
