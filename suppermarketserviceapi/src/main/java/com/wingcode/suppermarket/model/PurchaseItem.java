@@ -15,99 +15,88 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the purchase_item database table.
  * 
  */
 @Entity
-@Table(name="purchase_item")
-@NamedQuery(name="PurchaseItem.findAll", query="SELECT p FROM PurchaseItem p")
-public class PurchaseItem extends AuditModel  {
-	
+@Table(name = "purchase_item")
+@NamedQuery(name = "PurchaseItem.findAll", query = "SELECT p FROM PurchaseItem p")
+public class PurchaseItem extends AuditModel {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(nullable=false, precision=10, scale=2)
+	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal amount;
 
-	@Column(name="available_quantity", nullable=false, precision=10, scale=3)
+	@Column(name = "available_quantity", nullable = false, precision = 10, scale = 3)
 	private BigDecimal availableQuantity;
 
-	@Column(nullable=false, precision=10, scale=2)
+	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal cost;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="created_at", nullable=false)
+	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 
-	@Column(name="defect_quantity", precision=10, scale=3)
-	private BigDecimal defectQuantity;
-
-	@Column(name="defect_state", length=20)
-	private String defectState;
-
-	@Column(nullable=false, precision=10, scale=2)
+	@Column(nullable = false, precision = 10, scale = 2)
 	private BigDecimal discount;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="expire_date")
+	@Column(name = "expire_date")
 	private Date expireDate;
 
-	@Column(name="free_quantity", nullable=false, precision=10, scale=3)
+	@Column(name = "free_quantity", nullable = false, precision = 10, scale = 3)
 	private BigDecimal freeQuantity;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="manufacture_date")
+	@Column(name = "manufacture_date")
 	private Date manufactureDate;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="purchase_date", nullable=false)
+	@Column(name = "purchase_date", nullable = false)
 	private Date purchaseDate;
 
-	@Column(name="purchase_quantity", nullable=false, precision=10, scale=3)
-	private BigDecimal purchaseQuantity;
-
-	@Column(name="purchase_type", nullable=false, length=20)
+	@Column(name = "purchase_type", nullable = false, length = 20)
 	private String purchaseType;
 
-	@Column(nullable=false, precision=10, scale=2)
+	@Column(nullable = false, precision = 10, scale = 3)
 	private BigDecimal quantity;
 
-	@Column(name="real_quantity", nullable=false, precision=10, scale=3)
+	@Column(name = "real_quantity", nullable = false, precision = 10, scale = 3)
 	private BigDecimal realQuantity;
 
-	@Column(name="record_state", nullable=false, length=20)
+	@Column(name = "record_state", nullable = false, length = 20)
 	private String recordState;
 
-	@Column(name="reorder_level", precision=10, scale=2)
+	@Column(name = "reorder_level", precision = 10, scale = 2)
 	private BigDecimal reorderLevel;
 
-	@Column(name="retail_price", nullable=false, precision=10, scale=2)
+	@Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
 	private BigDecimal retailPrice;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updated_at", nullable=false)
+	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 
-	@Column(name="wholesale_price", nullable=false, precision=10, scale=2)
+	@Column(name = "wholesale_price", nullable = false, precision = 10, scale = 2)
 	private BigDecimal wholesalePrice;
 
-	//bi-directional many-to-one association to Item
+	// bi-directional many-to-one association to Item
 	@ManyToOne
-	@JoinColumn(name="item_id", nullable=false)
+	@JoinColumn(name = "item_id", nullable = false)
 	private Item item;
 
-	//bi-directional many-to-one association to Purchase
+	// bi-directional many-to-one association to Purchase
 	@ManyToOne
-	@JoinColumn(name="purchase_id", nullable=false)
+	@JoinColumn(name = "purchase_id", nullable = false)
 	private Purchase purchase;
 
-	
 	public Long getId() {
 		return this.id;
 	}
@@ -148,22 +137,6 @@ public class PurchaseItem extends AuditModel  {
 		this.createdAt = createdAt;
 	}
 
-	public BigDecimal getDefectQuantity() {
-		return this.defectQuantity;
-	}
-
-	public void setDefectQuantity(BigDecimal defectQuantity) {
-		this.defectQuantity = defectQuantity;
-	}
-
-	public String getDefectState() {
-		return this.defectState;
-	}
-
-	public void setDefectState(String defectState) {
-		this.defectState = defectState;
-	}
-
 	public BigDecimal getDiscount() {
 		return this.discount;
 	}
@@ -202,14 +175,6 @@ public class PurchaseItem extends AuditModel  {
 
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
-	}
-
-	public BigDecimal getPurchaseQuantity() {
-		return this.purchaseQuantity;
-	}
-
-	public void setPurchaseQuantity(BigDecimal purchaseQuantity) {
-		this.purchaseQuantity = purchaseQuantity;
 	}
 
 	public String getPurchaseType() {

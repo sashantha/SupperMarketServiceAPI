@@ -59,6 +59,9 @@ public class Purchase extends AuditModel {
 	@Column(name = "pay_amount", nullable = false, precision = 10, scale = 2)
 	private BigDecimal payAmount;
 
+	@Column(name = "chq_amount", nullable = false, precision = 10, scale = 2)
+	private BigDecimal chqAmount;
+
 	@Column(name = "pay_method", nullable = false, length = 20)
 	private String payMethod;
 
@@ -168,6 +171,14 @@ public class Purchase extends AuditModel {
 
 	public BigDecimal getPayAmount() {
 		return this.payAmount;
+	}
+
+	public void setChqAmount(BigDecimal chqAmount) {
+		this.chqAmount = chqAmount;
+	}
+
+	public BigDecimal getChqAmount() {
+		return this.chqAmount;
 	}
 
 	public void setPayAmount(BigDecimal payAmount) {

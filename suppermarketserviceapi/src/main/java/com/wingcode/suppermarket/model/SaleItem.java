@@ -41,12 +41,6 @@ public class SaleItem extends AuditModel {
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 
-	@Column(name = "defect_quantity", precision = 10, scale = 3)
-	private BigDecimal defectQuantity;
-
-	@Column(name = "defect_state", length = 20)
-	private String defectState;
-
 	@Column(precision = 10, scale = 2)
 	private BigDecimal discount;
 
@@ -125,22 +119,6 @@ public class SaleItem extends AuditModel {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public BigDecimal getDefectQuantity() {
-		return this.defectQuantity;
-	}
-
-	public void setDefectQuantity(BigDecimal defectQuantity) {
-		this.defectQuantity = defectQuantity;
-	}
-
-	public String getDefectState() {
-		return this.defectState;
-	}
-
-	public void setDefectState(String defectState) {
-		this.defectState = defectState;
 	}
 
 	public BigDecimal getDiscount() {

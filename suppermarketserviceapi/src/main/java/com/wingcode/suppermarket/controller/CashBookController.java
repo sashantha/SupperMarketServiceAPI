@@ -28,7 +28,7 @@ public class CashBookController {
 	@Autowired
 	private CashBookRepository cRepo;
 	
-	@GetMapping("/cashbooks/{trDate}")
+	@GetMapping("/cashbooks/trd/{trDate}")
 	public List<CashBook> getCashBookByTransactionDate(@PathVariable(value = "trDate") Date trDate) {
 		return cRepo.findByTransactionDate(trDate);
 	}

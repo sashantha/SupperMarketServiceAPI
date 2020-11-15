@@ -80,8 +80,6 @@ public class SalesController {
 			s.setSaleDate(si.getSaleDate());
 			s.setSalePrice(si.getSalePrice());
 			s.setRecordState(si.getRecordState());
-			s.setDefectQuantity(si.getDefectQuantity());
-			s.setDefectState(si.getDefectState());
 			s.setItem(si.getItem());
 			s.setUpdatedAt(new Date());
 			return siRepo.save(s);

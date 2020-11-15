@@ -83,7 +83,6 @@ public class PurchaseController {
 			p.setFreeQuantity(pi.getFreeQuantity());
 			p.setManufactureDate(pi.getManufactureDate());
 			p.setPurchaseDate(pi.getPurchaseDate());
-			p.setPurchaseQuantity(pi.getPurchaseQuantity());
 			p.setPurchaseType(pi.getPurchaseType());
 			p.setQuantity(pi.getQuantity());
 			p.setRealQuantity(pi.getRealQuantity());
@@ -91,8 +90,6 @@ public class PurchaseController {
 			p.setReorderLevel(pi.getReorderLevel());
 			p.setRetailPrice(pi.getRetailPrice());
 			p.setWholesalePrice(pi.getWholesalePrice());
-			p.setDefectQuantity(pi.getDefectQuantity());
-			p.setDefectState(pi.getDefectState());
 			p.setRecordState(pi.getRecordState());
 			p.setItem(pi.getItem());
 			p.setUpdatedAt(new Date());
@@ -180,6 +177,7 @@ public class PurchaseController {
 			p.setInvoiceType(pu.getInvoiceType());
 			p.setNetAmount(pu.getNetAmount());
 			p.setPayAmount(pu.getPayAmount());
+			p.setChqAmount(pu.getChqAmount());
 			p.setPayMethod(pu.getPayMethod());
 			p.setPurchaseDate(pu.getPurchaseDate());
 			p.setPurchaseDiscount(pu.getPurchaseDiscount());

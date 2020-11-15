@@ -28,7 +28,7 @@ public class ChequeBookController {
 	@Autowired
 	private ChequeBookRepository cqRepo;
 	
-	@GetMapping("/chequebooks/{trDate}")
+	@GetMapping("/chequebooks/trd/{trDate}")
 	public List<ChequeBook> getChequeBookByTransactionDate(@PathVariable(value = "trDate") Date trDate) {
 		return cqRepo.findByTransactionDate(trDate);
 	}
